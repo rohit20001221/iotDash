@@ -1,8 +1,15 @@
 import React, { useLayoutEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import LineChart from "../components/LineChart";
+import BarChart from "../components/BarChart";
 
 const data = [
   { quarter: 1, earnings: 13000 },
@@ -50,9 +57,11 @@ export default function Home() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <LineChart data={data} x="quater" y="earnings" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <LineChart data={data} x="quater" y="earnings" />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
