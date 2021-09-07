@@ -1,15 +1,15 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  Switch,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import LineChart from "../components/LineChart";
-import BarChart from "../components/BarChart";
 
 const data = [
   { quarter: 1, earnings: 13000 },
@@ -32,6 +32,26 @@ const data = [
 
 export default function Home() {
   const navigation = useNavigation();
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    let val;
+    if (toggle === false) {
+      val = 0;
+    } else {
+      val = 1;
+    }
+
+    fetch("http:192.168.1.10:8000/api/mqtt/post/led.main", {
+      method: "POST",
+      body: JSON.stringify({ value: val }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, [toggle]);
 
   const goToAddWidget = () => {
     navigation.navigate("add-widget");
@@ -60,6 +80,7 @@ export default function Home() {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <LineChart data={data} x="quater" y="earnings" />
+        <Switch value={toggle} onValueChange={(val) => setToggle(val)} />
       </ScrollView>
     </SafeAreaView>
   );
