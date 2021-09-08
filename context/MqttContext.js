@@ -18,6 +18,8 @@ export const MqttProvider = ({ children }) => {
 
   const disconnect = () => {
     socket.current.close();
+    setServer("");
+    setPort(0);
   };
 
   useEffect(() => {
