@@ -25,7 +25,6 @@ const Settings = () => {
           Server ip address
         </Text>
         <TextInput
-          keyboardType="numeric"
           style={tw`bg-gray-200 p-2 rounded-md`}
           placeholder="192.168.1.10"
           value={ip}
@@ -35,7 +34,6 @@ const Settings = () => {
       <View style={tw`my-2`}>
         <Text style={tw`text-lg font-bold text-gray-600`}>Server port</Text>
         <TextInput
-          keyboardType="numeric"
           style={tw`bg-gray-200 p-2 rounded-md`}
           placeholder="8000"
           value={port}
