@@ -3,10 +3,14 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./navigators/StackNavigator";
 
+import { MqttProvider } from "./context/MqttContext";
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <MqttProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </MqttProvider>
   );
 }
