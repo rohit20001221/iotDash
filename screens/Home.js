@@ -9,15 +9,35 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import PushButton from "../components/widgets/PushButton";
-import ToggleButton from "../components/widgets/ToggleButton";
-import ValueDisplay from "../components/widgets/ValueDisplay";
+
+import { widgetMapping } from "../components/WidgetMap";
 
 export default function Home() {
   const navigation = useNavigation();
 
   const goToAddWidget = () => {
     navigation.navigate("add-widget");
+  };
+
+  const renderWidget = ({
+    key,
+    message = "",
+    value = "",
+    title = "",
+    topic = "",
+    publishMessage = "",
+  }) => {
+    const Component = widgetMapping[key];
+
+    return (
+      <Component
+        message={message}
+        value={value}
+        title={title}
+        topic={topic}
+        publishMessage={publishMessage}
+      />
+    );
   };
 
   useLayoutEffect(() => {
@@ -42,13 +62,16 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <PushButton text={"led 1"} />
-        <ToggleButton text={"led main"} />
-        <ValueDisplay
-          title="triboard"
-          message={"the temperature of triboard is"}
-          value={30}
-        />
+        {renderWidget({ key: "toggle-button", title: "led.main" })}
+        {renderWidget({
+          key: "value-display",
+          title: "moisture.sensor",
+          message: "this is data from moisture sensor",
+        })}
+        {renderWidget({
+          key: "push-button",
+          title: "led.1",
+        })}
       </ScrollView>
     </SafeAreaView>
   );
