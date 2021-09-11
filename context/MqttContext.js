@@ -36,18 +36,20 @@ export const MqttProvider = ({ children }) => {
 
       socket.current.onmessage = (e) => {
         console.log(e.data);
-        let m = {};
+        let m = data;
         m[`${e.data.topic}`] = e.data.message;
-        setData((data) => ({ ...data, ...m }));
+        setData(message);
       };
 
       // after creating the socket subscribe each topic
-      subscriptions.forEach((topic) => {
-        let message = {
-          subscribe: topic,
-        };
-        socket.current.send(JSON.stringify(message));
-      });
+      if (subscriptions.length > 0) {
+        subscriptions.forEach((topic) => {
+          let message = {
+            subscribe: topic,
+          };
+          socket.current.send(JSON.stringify(message));
+        });
+      }
     }
   }, [server, port]);
 

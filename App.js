@@ -4,13 +4,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./navigators/StackNavigator";
 
 import { MqttProvider } from "./context/MqttContext";
+import { WidgetProvider } from "./context/WidgetContext";
 
 export default function App() {
   return (
     <MqttProvider>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
+      <WidgetProvider>
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+      </WidgetProvider>
     </MqttProvider>
   );
 }

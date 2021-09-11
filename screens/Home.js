@@ -10,10 +10,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
+import { useWidgets } from "../context/WidgetContext";
+
 import { widgetMapping } from "../components/WidgetMap";
 
 export default function Home() {
   const navigation = useNavigation();
+  const { widgets } = useWidgets();
 
   const goToAddWidget = () => {
     navigation.navigate("add-widget");
@@ -26,6 +29,7 @@ export default function Home() {
     title = "",
     topic = "",
     publishMessage = "",
+    id = "",
   }) => {
     const Component = widgetMapping[key];
 
@@ -36,6 +40,8 @@ export default function Home() {
         title={title}
         topic={topic}
         publishMessage={publishMessage}
+        id={id}
+        key={id}
       />
     );
   };
@@ -59,19 +65,12 @@ export default function Home() {
     });
   }, [navigation]);
 
+  console.log(widgets);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {renderWidget({ key: "toggle-button", title: "led.main" })}
-        {renderWidget({
-          key: "value-display",
-          title: "moisture.sensor",
-          message: "this is data from moisture sensor",
-        })}
-        {renderWidget({
-          key: "push-button",
-          title: "led.1",
-        })}
+        {widgets.map((item, id) => renderWidget({ ...item, id }))}
       </ScrollView>
     </SafeAreaView>
   );

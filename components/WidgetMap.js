@@ -7,5 +7,5 @@ export const widgetMapping = {
   "push-button": PushButton,
   "toggle-button": ToggleButton,
   "value-display": ValueDisplay,
-  "line-chart": LineChart,
+  "line-graph": LineChart,
 };
