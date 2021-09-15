@@ -7,7 +7,6 @@ import { useMqtt } from "../../context/MqttContext";
 
 const ValueDisplay = ({ message, title, topic }) => {
   const mqtt = useMqtt();
-  console.log(mqtt.data);
 
   useEffect(() => {
     mqtt.subscribe(topic);
