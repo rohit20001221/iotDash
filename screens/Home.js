@@ -28,7 +28,8 @@ export default function Home() {
     value = "",
     title = "",
     topic = "",
-    publishMessage = "",
+    publishMessageActive = "",
+    publishMessageInActive = "",
     id = "",
   }) => {
     const Component = widgetMapping[key];
@@ -39,7 +40,8 @@ export default function Home() {
         value={value}
         title={title}
         topic={topic}
-        publishMessage={publishMessage}
+        publishMessageActive={publishMessageActive}
+        publishMessageInActive={publishMessageInActive}
         id={id}
         key={id}
       />

@@ -72,6 +72,16 @@ export const MqttProvider = ({ children }) => {
     setSubscriptions((subs) => subs.filter((tpc) => tpc !== topic));
   };
 
+  const publish = (topic, message) => {
+    const data = {
+      publish: {
+        topic: topic,
+        message: message,
+      },
+    };
+    socket.current.send(JSON.stringify(data));
+  };
+
   const exports = {
     setServer,
     setPort,
@@ -83,6 +93,7 @@ export const MqttProvider = ({ children }) => {
     setData,
     isConnected,
     disconnect,
+    publish,
   };
   return (
     <MqttContext.Provider value={exports}>{children}</MqttContext.Provider>

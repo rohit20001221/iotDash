@@ -7,11 +7,27 @@ export const WidgetProvider = ({ children }) => {
   // list of widgets
   const [widgets, setWidgets] = useState([]);
 
-  const addWidget = ({ key, message, value, title, topic, publishMessage }) => {
+  const addWidget = ({
+    key,
+    message,
+    value,
+    title,
+    topic,
+    publishMessageActive,
+    publishMessageInActive,
+  }) => {
     const Component = widgetMapping[key];
     setWidgets((widgets) => [
       ...widgets,
-      { key, message, value, title, topic, publishMessage },
+      {
+        key,
+        message,
+        value,
+        title,
+        topic,
+        publishMessageActive,
+        publishMessageInActive,
+      },
     ]);
   };
 
