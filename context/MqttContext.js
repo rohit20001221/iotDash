@@ -18,6 +18,7 @@ export const MqttProvider = ({ children }) => {
 
   const disconnect = () => {
     socket.current.close();
+    socket.current = null;
     setServer("");
     setPort(0);
   };
@@ -79,7 +80,10 @@ export const MqttProvider = ({ children }) => {
         message: message,
       },
     };
-    socket.current.send(JSON.stringify(data));
+
+    if (socket.current !== null) {
+      socket.current.send(JSON.stringify(data));
+    }
   };
 
   const exports = {

@@ -4,14 +4,19 @@ import { useMqtt } from "../context/MqttContext";
 
 import tw from "tailwind-react-native-classnames";
 
+import { useNavigation } from "@react-navigation/native";
+
 const Settings = () => {
   const [ip, setIp] = useState("");
   const [port, setPort] = useState("");
   const mqtt = useMqtt();
+  const navigation = useNavigation();
 
   const connectServer = () => {
     mqtt.setServer(ip);
     mqtt.setPort(port);
+
+    navigation.goBack();
   };
 
   const disConnectServer = () => {
